@@ -1,2 +1,3 @@
-import tkinter as Tk;
+import tkinter as Tk
 
+window = Tk()

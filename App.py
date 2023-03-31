@@ -7,13 +7,57 @@ class face:
         self.window.title("AWS User Automation App")
         self.window.geometry('1200x675+0+0')
 
+        def u(name):
+            pass
+
+        def r(name):
+            pass
+
+        def user():
+            section = Toplevel()
+            section.title('User Details')
+            section.geometry('1200x675+0+0')
+
+            img=Image.open('images/amazon.jpg')
+            img=img.resize((1200,675),Image.Resampling.LANCZOS)
+            self.photobg=ImageTk.PhotoImage(img)
+            b = Label(section, image=self.photobg)
+            b.place(x=0,y=0)
+
+            Boardframe = LabelFrame(section,bd=20,bg="black",text ="USER Detail Section",foreground="white",relief=FLAT,font=('calibri',33))
+            Boardframe.place(x=120,y=80,width=900,height=80)
+            text_b = Text(Boardframe,width=800, height=595, font=('calibri',12),blockcursor=True,relief=FLAT)
+            text_b.pack()
+
+            b1 = Button(section, text = 'User Detail Display',bg='papaya whip',cursor='hand2' ,relief=FLAT, foreground='black', width=35, height=4,activebackground='light gray', command=lambda : u("d")).place(x=450, y= 270)
+            b2 = Button(section, text = 'Add User', bg='peach puff',cursor='hand2',relief=FLAT, foreground='black', width=35, height=4,activebackground='light gray', command=lambda: u("a")).place(x=450, y= 370)
+            b3 = Button(section, text = 'Modify/Delete User', bg='papaya whip',cursor='hand2',relief=FLAT, foreground='black', width=35, height=4,activebackground='light gray', command=lambda: u("md")).place(x=450, y= 470)
+            
+        def rnp():
+            section = Toplevel()
+            section.title('Policy Details')
+            section.geometry('1200x675+0+0')
+
+            img=Image.open('images/amazon.jpg')
+            img=img.resize((1200,675),Image.Resampling.LANCZOS)
+            self.photobg=ImageTk.PhotoImage(img)
+            b = Label(section, image=self.photobg)
+            b.place(x=0,y=0)
+            Boardframe = LabelFrame(section,bd=20,bg="black",text ="Policy Detail Section",foreground="white",relief=FLAT,font=('calibri',33))
+            Boardframe.place(x=120,y=80,width=900,height=80)
+            text_b = Text(Boardframe,width=800, height=595, font=('calibri',12),blockcursor=True,relief=FLAT)
+            text_b.pack()
+
+            b1 = Button(section, text = 'Policy Detail Display',bg='papaya whip',cursor='hand2' ,relief=FLAT, foreground='black', width=35, height=4,activebackground='light gray', command=lambda : r("d")).place(x=450, y= 270)
+            b2 = Button(section, text = 'Add/Delete Policy', bg='peach puff',cursor='hand2',relief=FLAT, foreground='black', width=35, height=4,activebackground='light gray', command=lambda: r("ad")).place(x=450, y= 370)
+    
         Boardframe = LabelFrame(self.window,bd=20,bg="black",text ="AWS-IAM User Recommendation System",foreground="white",relief=FLAT,font=('calibri',33))
         Boardframe.place(x=120,y=80,width=900,height=80)
         text_b = Text(Boardframe,width=800, height=595, font=('calibri',12),blockcursor=True,relief=FLAT)
         text_b.pack()
 
-        b1 = Button(window, text = 'User Information',bg='papaya whip',cursor='hand2' ,relief=FLAT, foreground='black', width=35, height=4,activebackground='light gray', command=lambda : user('u')).place(x=450, y= 270)#add,display and edit
-        b2 = Button(window, text = 'Roles & Policies', bg='peach puff',cursor='hand2',relief=FLAT, foreground='black', width=35, height=4,activebackground='light gray', command=lambda: rnp('r')).place(x=450, y= 370)#add and dislay
+        b1 = Button(window, text = 'User Information',bg='papaya whip',cursor='hand2' ,relief=FLAT, foreground='black', width=35, height=4,activebackground='light gray', command=lambda : user()).place(x=450, y= 270)#add,display and edit
+        b2 = Button(window, text = 'Roles & Policies', bg='peach puff',cursor='hand2',relief=FLAT, foreground='black', width=35, height=4,activebackground='light gray', command=lambda: rnp()).place(x=450, y= 370)#add and dislay
 
 window = Tk()
 

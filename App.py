@@ -8,7 +8,7 @@ class face:
         self.window.geometry('1200x675+0+0')
 
         def u(name):
-            if(name=="d"):
+            if(name=="md"):
                 section = Toplevel()
                 section.title('All Users')
                 section.geometry('1200x675+0+0')
@@ -57,9 +57,6 @@ class face:
                 
                 b1 = Button(w_frame, text = 'ADD',bg='green',cursor='hand2' ,relief=FLAT, foreground='black', width=20, height=3,activebackground='light gray', command=lambda : db).place(x=700, y= 195)
 
-            if(name=="md"):
-                pass
-
         def r(name):
             if(name=="d"):
                 section = Toplevel()
@@ -91,9 +88,8 @@ class face:
             text_b = Text(Boardframe,width=800, height=595, font=('calibri',12),blockcursor=True,relief=FLAT)
             text_b.pack()
 
-            b1 = Button(section, text = 'User Detail Display',bg='papaya whip',cursor='hand2' ,relief=FLAT, foreground='black', width=35, height=4,activebackground='light gray', command=lambda : u("d")).place(x=450, y= 270)
+            b1 = Button(section, text = 'User Detail Display',bg='papaya whip',cursor='hand2' ,relief=FLAT, foreground='black', width=35, height=4,activebackground='light gray', command=lambda : u("md")).place(x=450, y= 270)
             b2 = Button(section, text = 'Add User', bg='peach puff',cursor='hand2',relief=FLAT, foreground='black', width=35, height=4,activebackground='light gray', command=lambda: u("a")).place(x=450, y= 370)
-            b3 = Button(section, text = 'Modify/Delete User', bg='papaya whip',cursor='hand2',relief=FLAT, foreground='black', width=35, height=4,activebackground='light gray', command=lambda: u("md")).place(x=450, y= 470)
             
         def rnp():
             section = Toplevel()

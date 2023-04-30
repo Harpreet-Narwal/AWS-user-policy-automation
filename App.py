@@ -44,11 +44,19 @@ class face:
             drop.config(bg="papaya whip", fg="Black",relief=FLAT)
             drop.place(x=7,y=195,width=300,height=50)
 
-            q = "insert into db (colname) values(%s)"
-            c.execute(q,clicked.get())
+            def enter(pol):
+                q = "insert into db (colname) values(%s)"
+                c.execute(q,pol)
+                con.commit()
+
+            b1 = Button(w_frame, text = 'ADD',bg='green',cursor='hand2' ,relief=FLAT, foreground='black', width=20, height=3,activebackground='light gray', command=lambda : db(clicked.get())).place(x=700, y= 195)
+
+
+        def dbp(name,c1,c2,c3,c4):
+            query = "insert into db (colname) values(%s,%s,%s,%s,%s)"
+            vals = (name,c1,c2,c3,c4)
+            c.execute(query,vals)
             con.commit()
-
-
 
         def u(name):
             if(name=="md"):
@@ -88,8 +96,8 @@ class face:
 
                 options = [
                     "Admin",
-                    "Product Manganger",
-                    "Team Lead",
+                    "ProductManganger",
+                    "TeamLead",
                     "Employee"
                 ]
                 clicked = StringVar()
@@ -98,7 +106,7 @@ class face:
                 drop.config(bg="papaya whip", fg="Black",relief=FLAT)
                 drop.place(x=7,y=195,width=300,height=50)
                 
-                b1 = Button(w_frame, text = 'ADD',bg='green',cursor='hand2' ,relief=FLAT, foreground='black', width=20, height=3,activebackground='light gray', command=lambda : db(e1.get(),e2.get(),e3.get(),clicked.get())).place(x=700, y= 195)
+                b1 = Button(w_frame, text = 'ADD',bg='green',cursor='hand2' ,relief=FLAT, foreground='black', width=20, height=3,activebackground='light gray', command=lambda : dbp(e1.get(),e2.get(),e3.get(),clicked.get())).place(x=700, y= 195)
 
         def r(name):
             if(name=="d"):
@@ -113,7 +121,53 @@ class face:
                 b.place(x=0,y=0)
 
             if(name=="ad"):
-                pass
+                section = Toplevel()
+                section.title('Add Policy Details')
+                section.geometry('1200x675+0+0')
+
+                img=Image.open('images/amazon.jpg')
+                img=img.resize((1200,675),Image.Resampling.LANCZOS)
+                self.photobg=ImageTk.PhotoImage(img)
+                b = Label(section, image=self.photobg)
+                b.place(x=0,y=0)
+
+                w_frame = LabelFrame(section,bd=20,bg="black",relief=FLAT,text ="Fill Policy Details ---\n",foreground="white" ,font=('calibri',20))
+                w_frame.place(x=120,y=80,width=900,height=600)
+
+                e1=Entry(w_frame,width=76,relief=FLAT,borderwidth=8, font=1)
+                e1.insert(0,"Name")
+                e1.place(x=7,y=15)
+
+                options = [
+                    "YES",
+                    "NO"
+                ]
+                clicked1 = StringVar()
+                clicked1.set( "Admin Access" )
+                drop = OptionMenu( w_frame , clicked1 , *options)
+                drop.config(bg="papaya whip", fg="Black",relief=FLAT)
+                drop.place(x=7,y=75,width=300,height=50)
+
+                clicked2 = StringVar()
+                clicked2.set( "Product Manager Access" )
+                drop = OptionMenu( w_frame , clicked2 , *options)
+                drop.config(bg="papaya whip", fg="Black",relief=FLAT)
+                drop.place(x=7,y=135,width=300,height=50)
+
+                clicked3 = StringVar()
+                clicked3.set( "Team Lead Access" )
+                drop = OptionMenu( w_frame , clicked3 , *options)
+                drop.config(bg="papaya whip", fg="Black",relief=FLAT)
+                drop.place(x=7,y=195,width=300,height=50)
+
+                clicked4 = StringVar()
+                clicked4.set( "Employee Access" )
+                drop = OptionMenu( w_frame , clicked4 , *options)
+                drop.config(bg="papaya whip", fg="Black",relief=FLAT)
+                drop.place(x=7,y=255,width=300,height=50)
+                
+                b1 = Button(w_frame, text = 'ADD',bg='green',cursor='hand2' ,relief=FLAT, foreground='black', width=20, height=3,activebackground='light gray', command=lambda : db(e1.get(),clicked1.get(),clicked2.get(),clicked3.get(),clicked4.get())).place(x=700, y= 255)
+
 
         def user():
             section = Toplevel()

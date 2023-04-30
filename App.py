@@ -1,11 +1,51 @@
 from tkinter import *
 from PIL import Image,ImageTk
+import mysql.connector
+
+# con = mysql.connector.connect(host="localhost",user="root",password="",port="3306",databse="")
+# c=con.cursor()
 
 class face:
     def __init__(self,window):
         self.window = window
         self.window.title("AWS User Automation App")
         self.window.geometry('1200x675+0+0')
+
+        def db(name,d1,d2,position,policy):
+            # query = "insert into db (colname) values(%s,%s,%s,%s)"
+            # vals = (name,d1,d2,position)
+            # c.execute(query,vals)
+            # con.commit()
+
+            section = Toplevel()
+            section.title(name)
+            section.geometry('1200x675+0+0')
+
+            img=Image.open('images/amazon.jpg')
+            img=img.resize((1200,675),Image.Resampling.LANCZOS)
+            self.photobg=ImageTk.PhotoImage(img)
+            b = Label(section, image=self.photobg)
+            b.place(x=0,y=0)
+
+            w_frame = LabelFrame(section,bd=20,bg="white",relief=FLAT,text ="USER Details ---\n",foreground="white" ,font=('calibri',20))
+            w_frame.place(x=120,y=80,width=900,height=600)
+
+            l1 = Label(w_frame,text=name,font=('calibri',18)).pack()
+            l2 = Label(w_frame,text=d1,font=('calibri',18)).pack()
+            l3 = Label(w_frame,text=d2,font=('calibri',18)).pack()
+            l4 = Label(w_frame,text=position,font=('calibri',18)).pack()
+
+            clicked = StringVar()
+            clicked.set( "Recommended Policy" )
+            drop = OptionMenu( w_frame , clicked , *policy)
+            drop.config(bg="papaya whip", fg="Black",relief=FLAT)
+            drop.place(x=7,y=195,width=300,height=50)
+
+            # q = "insert into db (colname) values(%s)"
+            # c.execute(q,clicked.get())
+            # con.commit()
+
+
 
         def u(name):
             if(name=="md"):
@@ -55,7 +95,7 @@ class face:
                 drop.config(bg="papaya whip", fg="Black",relief=FLAT)
                 drop.place(x=7,y=195,width=300,height=50)
                 
-                b1 = Button(w_frame, text = 'ADD',bg='green',cursor='hand2' ,relief=FLAT, foreground='black', width=20, height=3,activebackground='light gray', command=lambda : db).place(x=700, y= 195)
+                b1 = Button(w_frame, text = 'ADD',bg='green',cursor='hand2' ,relief=FLAT, foreground='black', width=20, height=3,activebackground='light gray', command=lambda : db(e1.get(),e2.get(),e3.get(),clicked.get())).place(x=700, y= 195)
 
         def r(name):
             if(name=="d"):

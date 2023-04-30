@@ -2,8 +2,8 @@ from tkinter import *
 from PIL import Image,ImageTk
 import mysql.connector
 
-# con = mysql.connector.connect(host="localhost",user="root",password="",port="3306",databse="")
-# c=con.cursor()
+con = mysql.connector.connect(host="localhost",user="root",password="",port="3306",databse="")
+c=con.cursor()
 
 class face:
     def __init__(self,window):
@@ -11,11 +11,14 @@ class face:
         self.window.title("AWS User Automation App")
         self.window.geometry('1200x675+0+0')
 
-        def db(name,d1,d2,position,policy):
-            # query = "insert into db (colname) values(%s,%s,%s,%s)"
-            # vals = (name,d1,d2,position)
-            # c.execute(query,vals)
-            # con.commit()
+        def db(name,d1,d2,position):
+            query = "insert into db (colname) values(%s,%s,%s,%s)"
+            vals = (name,d1,d2,position)
+            c.execute(query,vals)
+            con.commit()
+
+            c.execute(f'select policyname from policy where {position}="YES"')
+            policy = c.fetchall()
 
             section = Toplevel()
             section.title(name)
@@ -41,9 +44,9 @@ class face:
             drop.config(bg="papaya whip", fg="Black",relief=FLAT)
             drop.place(x=7,y=195,width=300,height=50)
 
-            # q = "insert into db (colname) values(%s)"
-            # c.execute(q,clicked.get())
-            # con.commit()
+            q = "insert into db (colname) values(%s)"
+            c.execute(q,clicked.get())
+            con.commit()
 
 
 

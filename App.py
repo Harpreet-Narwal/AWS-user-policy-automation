@@ -18,7 +18,9 @@ class face:
             con.commit()
 
             c.execute(f'select policyname from policy where {position}="YES"')
-            policy = c.fetchall()
+            policy = []
+            for i in c:
+                policy.append(i[0])
 
             section = Toplevel()
             section.title(name)
@@ -44,12 +46,11 @@ class face:
             drop.config(bg="papaya whip", fg="Black",relief=FLAT)
             drop.place(x=7,y=195,width=300,height=50)
 
-            def enter(pol):
-                q = "insert into db (colname) values(%s)"
-                c.execute(q,pol)
+            def enter(pol,n):
+                c.execute(f'insert into db (colname) values({[pol]}) where name={n}')
                 con.commit()
 
-            b1 = Button(w_frame, text = 'ADD',bg='green',cursor='hand2' ,relief=FLAT, foreground='black', width=20, height=3,activebackground='light gray', command=lambda : db(clicked.get())).place(x=700, y= 195)
+            b1 = Button(w_frame, text = 'ADD',bg='green',cursor='hand2' ,relief=FLAT, foreground='black', width=20, height=3,activebackground='light gray', command=lambda : enter(clicked.get(),name)).place(x=700, y= 195)
 
 
         def dbp(name,c1,c2,c3,c4):
@@ -106,7 +107,7 @@ class face:
                 drop.config(bg="papaya whip", fg="Black",relief=FLAT)
                 drop.place(x=7,y=195,width=300,height=50)
                 
-                b1 = Button(w_frame, text = 'ADD',bg='green',cursor='hand2' ,relief=FLAT, foreground='black', width=20, height=3,activebackground='light gray', command=lambda : dbp(e1.get(),e2.get(),e3.get(),clicked.get())).place(x=700, y= 195)
+                b1 = Button(w_frame, text = 'ADD',bg='green',cursor='hand2' ,relief=FLAT, foreground='black', width=20, height=3,activebackground='light gray', command=lambda : db(e1.get(),e2.get(),e3.get(),clicked.get())).place(x=700, y= 195)
 
         def r(name):
             if(name=="d"):
@@ -166,7 +167,7 @@ class face:
                 drop.config(bg="papaya whip", fg="Black",relief=FLAT)
                 drop.place(x=7,y=255,width=300,height=50)
                 
-                b1 = Button(w_frame, text = 'ADD',bg='green',cursor='hand2' ,relief=FLAT, foreground='black', width=20, height=3,activebackground='light gray', command=lambda : db(e1.get(),clicked1.get(),clicked2.get(),clicked3.get(),clicked4.get())).place(x=700, y= 255)
+                b1 = Button(w_frame, text = 'ADD',bg='green',cursor='hand2' ,relief=FLAT, foreground='black', width=20, height=3,activebackground='light gray', command=lambda : dbp(e1.get(),clicked1.get(),clicked2.get(),clicked3.get(),clicked4.get())).place(x=700, y= 255)
 
 
         def user():
